@@ -23,8 +23,6 @@ Note: this wouldn't find the vulnerability if you build the vulnerable version o
 helm install shell-chart shellshockable/ --values shellshockable/values.yaml
 ```
 
-kubectl describe $(kubectl get pods -l app.kubernetes.io/name=shellshockable -o name)
-
 ### Port-forwarding
 
 ```sh
@@ -62,8 +60,17 @@ Test that a version of bash is exploitable:
 env x='() { :; }; echo vulnerable' bash -c "echo test"
 ```
 
+## Starboard
+
+Install [starboard](https://github.com/aquasecurity/starboard) - for example `kubectl krew install starboard`
+and  `kubectl starboard init` to create the CRDs.
+
+```
+$ `kubectl starboard find vulnerabilities deployment/shell-chart-shellshockable
+$ `kubectl starboard get vulnerabilities deployment/shell-chart-shellshockable
+```
+
+Run `octant` to view them there.
 
 
-
-Create an ingress: https://kind.sigs.k8s.io/docs/user/ingress/
 
