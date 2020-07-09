@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 echo "Content-type: text/html"
 echo ""
-echo "https://shellshocker.net/"
+echo "Regular, expected output"

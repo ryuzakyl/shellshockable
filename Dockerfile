@@ -1,5 +1,4 @@
 FROM ubuntu:14.04
-MAINTAINER Thibault NORMAND <me@zenithar.org>
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
@@ -19,12 +18,21 @@ RUN a2enmod cgid
 
 # Install vulnerable bash
 RUN apt-get install -y build-essential wget
-RUN wget https://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz && \
-    tar zxvf bash-4.3.tar.gz && \
-    cd bash-4.3 && \
-    ./configure && \
-    make && \
-    make install
+
+# Install vulnerable bash 4.3 from package
+RUN wget https://snapshot.debian.org/archive/debian/20140304T040604Z/pool/main/b/bash/bash_4.1-3_amd64.deb
+RUN dpkg -i bash_4.1-3_amd64.deb
+
+# Or build bash 4.3 from source
+# RUN wget https://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz && \
+#     tar zxvf bash-4.3.tar.gz && \
+#     cd bash-4.3 && \
+#     ./configure && \
+#     make && \
+#     make install
+
+# Make HTML directory writeable - it's cheating, but it makes the exploit really easy to demo
+RUN chmod o+w /var/www/html
 
 EXPOSE 80
 
