@@ -1,0 +1,9 @@
+image:
+  tag: 0.2.0
+  # Non-root version runs on a high-numbered port
+  containerPort: 8100
+
+securityContext:
+  runAsNonRoot: true
+
+

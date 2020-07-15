@@ -9,6 +9,7 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+  containerPort: 80
 
 imagePullSecrets: []
 nameOverride: ""
