@@ -15,7 +15,7 @@ This demo uses three different versions
 make push
 ```
 
-**TODO: environment variable for Docker Hub account / registry so it doesn't have to use lizrice (needs changes to makefile and Helm chart)
+> TODO: environment variable for Docker Hub account / registry so it doesn't have to use lizrice (needs changes to makefile and Helm chart)
 
 ### Find the vulnerability with Trivy
 
@@ -23,7 +23,7 @@ make push
 trivy image lizrice/shellshockable:0.1.0
 ```
 
-Note: the Dockerfile installs the vulnerable package. A vulnerability scanner wouldn't find the vulnerability if you build the vulnerable version of bash from source.
+> Note: the Dockerfile installs the vulnerable package. A vulnerability scanner wouldn't find the vulnerability if you build the vulnerable version of bash from source.
 
 ### Install on Kubernetes with Helm
 
@@ -38,8 +38,9 @@ helm install shell-chart shellshockable/ --values shellshockable/values.yaml
 kubectl port-forward $(kubectl get pods -l app.kubernetes.io/name=shellshockable -o name) 8081:80
 ```
 
-** TODO: use an ingress so you don't have to re-do the port forwarding every time
-** TODO: could also set up a fake domain in /etc/hosts on the host to pretend that this is on a "real" web site
+> TODO: use an ingress so you don't have to re-do the port forwarding every time
+
+> TODO: could also set up a fake domain in /etc/hosts on the host to pretend that this is on a "real" web site
 
 ### Regular query
 
@@ -47,7 +48,7 @@ kubectl port-forward $(kubectl get pods -l app.kubernetes.io/name=shellshockable
 curl localhost:8081/cgi-bin/shockme.cgi
 ```
 
-** TODO: consider renaming shockme.cgi so it's more "normal"
+> TODO: consider renaming shockme.cgi so it's more "normal"
 
 ### Read files from the host
 
@@ -105,7 +106,7 @@ Run `octant` to view them there. You should see vulnerabilities (including HIGH 
 ## Run as non-root
 
 ```sh
-helm upgrade -f security-context.yaml shell-chart shellshockable --set image.tag=0.2.0
+helm upgrade -f 0.2.0.yaml shell-chart shellshockable
 ```
 
 This container uses a high numbered port so it can run as nonRoot
@@ -116,12 +117,12 @@ kubectl port-forward $(kubectl get pods -l app.kubernetes.io/name=shellshockable
 
 Re-run polaris and check the test for runAsNonRoot is now passing.
 
-** Note: This config doesn't set readOnlyRootFileSystem, because Apache wants to write files.
+> Note: This config doesn't set readOnlyRootFileSystem, because Apache wants to write files.
 
 ## Upgrade to non-vulnerable version
 
 ```sh
-helm upgrade shell-chart shellshockable --set image.tag=0.3.0
+helm upgrade -f 0.3.0.yaml shell-chart shellshockable
 kubectl port-forward $(kubectl get pods -l app.kubernetes.io/name=shellshockable -o name) 8081:8100
 ```
 
