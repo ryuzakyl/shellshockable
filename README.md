@@ -11,6 +11,8 @@ This demo uses three different versions
 
 ### Build and push to Docker Hub
 
+Skip this step if you want to use my version of the images already pushed to Docker Hub.
+
 ```sh
 make push
 ```
