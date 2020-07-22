@@ -128,4 +128,6 @@ helm upgrade -f 0.3.0.yaml shell-chart shellshockable
 kubectl port-forward $(kubectl get pods -l app.kubernetes.io/name=shellshockable -o name) 8081:8100
 ```
 
+> Note: for now you need to delete old vulnerability reports otherwise the Octant plugin may not pick up the latest: `k delete vulns --all` will do it
+
 Re-run find vulnerabilities and check this is no longer an issue
