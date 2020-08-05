@@ -9,29 +9,22 @@ This demo uses three different versions
 * shellshockable:0.2.0 - runs as non-root but still has the vulnerability
 * shellshockable:0.3.0 - runs as non-root, without shellshock vulnerability
 
-### Build and push to Docker Hub
+## Install from hosted Helm chart
 
-Skip this step if you want to use my version of the images already pushed to Docker Hub.
-
-```sh
-make push
-```
-
-> TODO: environment variable for Docker Hub account / registry so it doesn't have to use lizrice (needs changes to makefile and Helm chart)
-
-### Find the vulnerability with Trivy
+The gh-pages branch of this repo serves a Helm chart that you can install directly (but only do this for demo purposes - DON'T DO THIS ON A REAL CLUSTER):
 
 ```sh
-trivy image lizrice/shellshockable:0.1.0
+helm install shellshockable https://lizrice.github.io/shellshockable/shellshockable-0.1.0.tgz
 ```
 
-> Note: the Dockerfile installs the vulnerable package. A vulnerability scanner wouldn't find the vulnerability if you build the vulnerable version of bash from source.
+## Clone this repo and install with Helm from local directory
 
-### Install on Kubernetes with Helm
 
 ```sh
 helm install shell-chart shellshockable/ --values shellshockable/values.yaml
 ```
+
+## Exploit 
 
 ### Port-forwarding
 
@@ -91,6 +84,25 @@ env x='() { :; }; echo vulnerable' bash -c "echo test"
 ```
 
 You'll see the word "vulnerable" only if shellshock is present.
+
+## Build and push to Docker Hub
+
+Skip this step if you want to use my version of the images already pushed to Docker Hub.
+
+```sh
+make push
+```
+
+> TODO: environment variable for Docker Hub account / registry so it doesn't have to use lizrice (needs changes to makefile and Helm chart)
+
+### Find the vulnerability with Trivy
+
+```sh
+trivy image lizrice/shellshockable:0.1.0
+```
+
+> Note: the Dockerfile installs the vulnerable package. A vulnerability scanner wouldn't find the vulnerability if you build the vulnerable version of bash from source.
+
 
 ## Starboard
 

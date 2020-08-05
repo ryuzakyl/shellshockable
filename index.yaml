@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  shellshockable:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2020-08-05T11:10:28.31645+01:00"
+    description: WARNING! This contains the Shellshock vulnerability and is for demo purposes only!
+    digest: 67e6a754da844ece5f6d1e96f4427414c1b92437f3217500d413fd05cd99a221
+    name: shellshockable
+    type: application
+    urls:
+    - https://lizrice.github.io/shellshockable/shellshockable-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-08-05T11:10:28.315377+01:00"
