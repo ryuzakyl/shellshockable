@@ -1,4 +1,4 @@
-docker-shellshockable
+Shellshockable
 =====================
 
 Docker container with Apache 2 / CGI shellshock vulnerability. This builds on an original version by [Thibault Normand](https://github.com/Zenithar)
